@@ -1,4 +1,11 @@
 var __defProp = Object.defineProperty;
+var __require = /* @__PURE__ */ ((x) => typeof require < "u" ? require : typeof Proxy < "u" ? new Proxy(x, {
+  get: (a, b) => (typeof require < "u" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require < "u")
+    return require.apply(this, arguments);
+  throw new Error('Dynamic require of "' + x + '" is not supported');
+});
 var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: !0 });
@@ -129,29 +136,62 @@ import {
 import { jsxDEV as jsxDEV2 } from "react/jsx-dev-runtime";
 
 // app/LoggedOut/LoginForm/index.tsx
-import { useAccount, useConnect, useDisconnect } from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
+import { useAccount, useConnect, useDisconnect, useEnsName } from "wagmi";
 import { jsxDEV as jsxDEV3 } from "react/jsx-dev-runtime";
 var LoginForm = () => {
-  let { address, isConnected } = useAccount(), { connect } = useConnect({
-    connector: new InjectedConnector()
-  }), { disconnect } = useDisconnect();
+  let { address, connector, isConnected } = useAccount(), { data: ensName } = useEnsName({ address }), { connect, connectors, error, isLoading, pendingConnector } = useConnect(), { disconnect } = useDisconnect();
   return isConnected ? /* @__PURE__ */ jsxDEV3("div", { children: [
-    "Connected to ",
-    address,
-    /* @__PURE__ */ jsxDEV3("button", { onClick: () => disconnect(), children: "Disconnect" }, void 0, !1, {
+    /* @__PURE__ */ jsxDEV3("div", { children: ensName ? `${ensName} (${address})` : address }, void 0, !1, {
+      fileName: "app/LoggedOut/LoginForm/index.tsx",
+      lineNumber: 15,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ jsxDEV3("div", { children: [
+      "Connected to ",
+      connector?.name
+    ] }, void 0, !0, {
       fileName: "app/LoggedOut/LoginForm/index.tsx",
       lineNumber: 16,
-      columnNumber: 11
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ jsxDEV3("button", { onClick: () => disconnect(), children: "Disconnect" }, void 0, !1, {
+      fileName: "app/LoggedOut/LoginForm/index.tsx",
+      lineNumber: 17,
+      columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/LoggedOut/LoginForm/index.tsx",
     lineNumber: 14,
-    columnNumber: 9
-  }, this) : /* @__PURE__ */ jsxDEV3("button", { onClick: () => connect(), children: "Connect Wallet" }, void 0, !1, {
+    columnNumber: 7
+  }, this) : /* @__PURE__ */ jsxDEV3("div", { children: [
+    connectors.map((connector2) => /* @__PURE__ */ jsxDEV3(
+      "button",
+      {
+        onClick: () => connect({ connector: connector2 }),
+        children: [
+          connector2.name,
+          !connector2.ready && " (Not Ready To Connect)",
+          isLoading && connector2.id === pendingConnector?.id && " (connecting)"
+        ]
+      },
+      connector2.id,
+      !0,
+      {
+        fileName: "app/LoggedOut/LoginForm/index.tsx",
+        lineNumber: 26,
+        columnNumber: 11
+      },
+      this
+    )),
+    error && /* @__PURE__ */ jsxDEV3("div", { children: error.message }, void 0, !1, {
+      fileName: "app/LoggedOut/LoginForm/index.tsx",
+      lineNumber: 40,
+      columnNumber: 17
+    }, this)
+  ] }, void 0, !0, {
     fileName: "app/LoggedOut/LoginForm/index.tsx",
-    lineNumber: 19,
-    columnNumber: 10
+    lineNumber: 23,
+    columnNumber: 5
   }, this);
 }, LoginForm_default = LoginForm;
 
@@ -164,122 +204,152 @@ var LoggedOut = () => {
     /* @__PURE__ */ jsxDEV4("div", { children: [
       /* @__PURE__ */ jsxDEV4("h1", { children: "Welcome to [Project Name]!" }, void 0, !1, {
         fileName: "app/LoggedOut/index.tsx",
-        lineNumber: 12,
+        lineNumber: 13,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV4("h2", { children: "\u{1F389} Dive into the future of digital art and collectibles with [Project Name] - a unique and groundbreaking NFT collection that stands at the intersection of creativity, technology, and innovation." }, void 0, !1, {
         fileName: "app/LoggedOut/index.tsx",
-        lineNumber: 14,
+        lineNumber: 15,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV4("div", { children: [
         /* @__PURE__ */ jsxDEV4("h3", { children: "\u{1F5BC} What's [Project Name] all about?" }, void 0, !1, {
           fileName: "app/LoggedOut/index.tsx",
-          lineNumber: 17,
+          lineNumber: 18,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV4("p", { children: "Our project is more than just pixels and code; it's a blend of passion, artistic vision, and the endless possibilities of the blockchain. By becoming a part of our community, you are not only securing a piece of digital art but also supporting the ever-evolving landscape of digital creators and enthusiasts." }, void 0, !1, {
           fileName: "app/LoggedOut/index.tsx",
-          lineNumber: 20,
+          lineNumber: 21,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/LoggedOut/index.tsx",
-        lineNumber: 16,
+        lineNumber: 17,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV4("div", { children: [
         /* @__PURE__ */ jsxDEV4("h3", { children: "\u{1FA84} Ready to Mint Your Token?" }, void 0, !1, {
           fileName: "app/LoggedOut/index.tsx",
-          lineNumber: 26,
+          lineNumber: 27,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV4("p", { children: "You're in the right place! This is the dedicated space where you can mint new tokens, expanding your collection and securing a piece of [Project Name]'s legacy. Just follow the instructions below, and you'll be the proud owner of a unique NFT in no time!" }, void 0, !1, {
           fileName: "app/LoggedOut/index.tsx",
-          lineNumber: 29,
+          lineNumber: 30,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/LoggedOut/index.tsx",
-        lineNumber: 25,
+        lineNumber: 26,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV4("div", { children: [
         /* @__PURE__ */ jsxDEV4("h3", { children: "\u{1F4A1} Not Familiar with NFTs?" }, void 0, !1, {
           fileName: "app/LoggedOut/index.tsx",
-          lineNumber: 35,
+          lineNumber: 36,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV4("p", { children: "No worries! NFT stands for Non-Fungible Token. In simpler terms, it's a one-of-a-kind digital asset verified by blockchain technology, ensuring its authenticity and uniqueness. Think of it as a collectible digital trading card or artwork!" }, void 0, !1, {
           fileName: "app/LoggedOut/index.tsx",
-          lineNumber: 38,
+          lineNumber: 39,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/LoggedOut/index.tsx",
-        lineNumber: 34,
+        lineNumber: 35,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV4("div", { children: [
         /* @__PURE__ */ jsxDEV4("h3", { children: "\u{1F91D} Join Our Community!" }, void 0, !1, {
           fileName: "app/LoggedOut/index.tsx",
-          lineNumber: 45,
+          lineNumber: 46,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV4("p", { children: "The real magic happens when enthusiasts like you come together. Connect with fellow collectors, share your insights, and stay updated on the latest [Project Name] news and releases by joining our community channels." }, void 0, !1, {
           fileName: "app/LoggedOut/index.tsx",
-          lineNumber: 48,
+          lineNumber: 49,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/LoggedOut/index.tsx",
-        lineNumber: 44,
+        lineNumber: 45,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV4("p", { children: "Thank you for being a part of this journey with us. Let's mint the future together! \u{1F680}" }, void 0, !1, {
         fileName: "app/LoggedOut/index.tsx",
-        lineNumber: 52,
+        lineNumber: 53,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/LoggedOut/index.tsx",
-      lineNumber: 11,
+      lineNumber: 12,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV4("br", {}, void 0, !1, {
       fileName: "app/LoggedOut/index.tsx",
-      lineNumber: 57,
+      lineNumber: 58,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV4(LoginForm_default, {}, void 0, !1, {
       fileName: "app/LoggedOut/index.tsx",
-      lineNumber: 59,
+      lineNumber: 60,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/LoggedOut/index.tsx",
-    lineNumber: 10,
+    lineNumber: 11,
     columnNumber: 7
   }, this);
 }, LoggedOut_default = LoggedOut;
 
 // app/App/index.tsx
-import { createPublicClient, http } from "viem";
-import { createConfig, mainnet, WagmiConfig } from "wagmi";
+import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
+import { publicProvider } from "wagmi/providers/public";
+import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { jsxDEV as jsxDEV5 } from "react/jsx-dev-runtime";
-var config = createConfig({
+typeof window < "u" && (window.Buffer = window.Buffer || __require("buffer").Buffer);
+var { chains, publicClient, webSocketPublicClient } = configureChains(
+  [mainnet],
+  [publicProvider()]
+), config = createConfig({
   autoConnect: !0,
-  publicClient: createPublicClient({
-    chain: mainnet,
-    transport: http()
-  })
+  connectors: [
+    new CoinbaseWalletConnector({
+      chains,
+      options: {
+        appName: "wagmi"
+      }
+    }),
+    new MetaMaskConnector({
+      chains,
+      options: {
+        shimDisconnect: !0
+      }
+    }),
+    new InjectedConnector({
+      chains,
+      options: {
+        name: "Injected",
+        getProvider() {
+          if (typeof window < "u" && window.ethereum)
+            return window.ethereum;
+        },
+        shimDisconnect: !0
+      }
+    })
+  ],
+  publicClient,
+  webSocketPublicClient
 }), App = () => /* @__PURE__ */ jsxDEV5(WagmiConfig, { config, children: /* @__PURE__ */ jsxDEV5(LoggedOut_default, {}, void 0, !1, {
   fileName: "app/App/index.tsx",
-  lineNumber: 19,
+  lineNumber: 56,
   columnNumber: 35
 }, this) }, void 0, !1, {
   fileName: "app/App/index.tsx",
-  lineNumber: 18,
+  lineNumber: 55,
   columnNumber: 7
 }, this), App_default = App;
 
@@ -298,61 +368,61 @@ function Root() {
         !1,
         {
           fileName: "app/root.tsx",
-          lineNumber: 17,
+          lineNumber: 18,
           columnNumber: 9
         },
         this
       ),
       /* @__PURE__ */ jsxDEV6(Meta, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 21,
+        lineNumber: 22,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV6(Links, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 22,
+        lineNumber: 23,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/root.tsx",
-      lineNumber: 16,
+      lineNumber: 17,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV6("body", { children: [
       /* @__PURE__ */ jsxDEV6(App_default, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 26,
+        lineNumber: 27,
         columnNumber: 7
       }, this),
       /* @__PURE__ */ jsxDEV6(Outlet, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 28,
+        lineNumber: 29,
         columnNumber: 7
       }, this),
       /* @__PURE__ */ jsxDEV6(Scripts, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 29,
+        lineNumber: 30,
         columnNumber: 7
       }, this),
       /* @__PURE__ */ jsxDEV6(LiveReload, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 30,
+        lineNumber: 31,
         columnNumber: 7
       }, this)
     ] }, void 0, !0, {
       fileName: "app/root.tsx",
-      lineNumber: 24,
+      lineNumber: 25,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/root.tsx",
-    lineNumber: 15,
+    lineNumber: 16,
     columnNumber: 7
   }, this);
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-ANXMZT5K.js", imports: ["/build/_shared/chunk-ZWGWGGVF.js", "/build/_shared/chunk-XU7DNSPJ.js", "/build/_shared/chunk-YIJQBV55.js", "/build/_shared/chunk-ONWUGS7F.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-GIAAE3CH.js", "/build/_shared/chunk-BOXFZXVX.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-75VYNPPZ.js", imports: ["/build/_shared/chunk-H5TQA62F.js", "/build/_shared/chunk-HJXDG4R7.js", "/build/_shared/chunk-CSQX3O44.js"], hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 } }, version: "2e9d76e2", hmr: { runtime: "/build/_shared/chunk-ONWUGS7F.js", timestamp: 1695668394396 }, url: "/build/manifest-2E9D76E2.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-7TBY4QJC.js", imports: ["/build/_shared/chunk-ZWGWGGVF.js", "/build/_shared/chunk-XU7DNSPJ.js", "/build/_shared/chunk-ER7PLH5W.js", "/build/_shared/chunk-ONWUGS7F.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-GIAAE3CH.js", "/build/_shared/chunk-BOXFZXVX.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-G2ATKMJI.js", imports: ["/build/_shared/chunk-H5TQA62F.js", "/build/_shared/chunk-HJXDG4R7.js", "/build/_shared/chunk-CSQX3O44.js", "/build/_shared/chunk-F2MW2ORK.js"], hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 } }, version: "e0c75fd2", hmr: { runtime: "/build/_shared/chunk-ONWUGS7F.js", timestamp: 1695923703150 }, url: "/build/manifest-E0C75FD2.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public/build", future = {}, publicPath = "/build/", entry = { module: entry_server_node_exports }, routes = {
